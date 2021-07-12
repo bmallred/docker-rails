@@ -1,4 +1,4 @@
-FROM ruby:2.4.1
+FROM ruby:2.7.0
 MAINTAINER Bryan Allred <bryan@revolvingcow.com>
 
 RUN apt-get update -qq \
@@ -7,7 +7,7 @@ RUN apt-get update -qq \
             make \
             build-essential \
             libpq-dev \
-            tcl8.5 \
+            tcl \
             nodejs \
             imagemagick \
             curl \
@@ -16,8 +16,9 @@ RUN apt-get update -qq \
             libgtkmm-3.0.1 \
             libnotify4
 
-RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-RUN bash -c "curl -sSL https://get.rvm.io | bash -s stable --ruby=2.4.1 --rails; exit 0"
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+RUN curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+RUN bash -c "curl -sSL https://get.rvm.io | bash -s stable --ruby=2.7.0 --rails; exit 0"
 
 RUN mkdir /app
 WORKDIR /app
